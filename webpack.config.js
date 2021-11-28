@@ -13,12 +13,23 @@ module.exports = {
         }
       },
       {
+        test: /\.(jpg|png)$/,
+        use: {
+          loader: 'url-loader',
+        },
+      },      
+      {
         test: /\.css$/,
         use: [
           MiniCssExtractPlugin.loader,
           "css-loader", "postcss-loader",
           ],
-      },      
+      },
+      {
+        test: /\.html$/i,
+        loader: "html-loader",
+      },
+     
     ]
   },
   plugins: [

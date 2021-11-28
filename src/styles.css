@@ -1,8 +1,10 @@
-/* Preflight will be injected here */
-@tailwind base; 
+@tailwind base;
 
 @tailwind components;
 
+.encabezado{
+  @apply text-3xl font-bold text-gray-800 mx-2 mb-3
+}
 @tailwind utilities;
 
 /* Custom css */
