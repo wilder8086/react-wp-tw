@@ -184,10 +184,21 @@ ReactDOM.render(<Index />, document.getElementById("index"));
 
 # npm run start
 
+# Install moment para formateo de fechas
+1.  npm install moment
 
+# Call api service with fetch
+1. install : npm i --save-dev @babel/plugin-transform-runtime
+2. Add the plugin to your .babelrc file: "plugins": ["@babel/plugin-transform-runtime"]
 
+# Loading image
 
+1. npm install file-loader --save-dev
 
+usando require para exporta imagenes
+<img src={require('assets/logo.png').default}/> <!-- React -->
+<!-- OR -->
+<img src="require('assets/logo.png').default"/> <!-- Vue -->
  
 
 
