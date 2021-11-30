@@ -3,6 +3,7 @@ import moment from 'moment';
 
 const DataTitle = ({text, dataDate}) => {
 
+  console.log("Render DataTitle");
   const timestamp = (date) => {
     return moment(date).format('MMMM Do YYYY, h:mm:ss a');
   }

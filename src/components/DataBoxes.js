@@ -2,10 +2,13 @@ import React from 'react';
 
 
 const DataBoxes = ({ stats }) => {
-const numberWithcommas = (x) => {
-  return x.toString()
-  .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-}
+
+  console.log("Render DataBoxes");
+  
+  const numberWithcommas = (x) => {
+    return x.toString()
+      .replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  }
 
   return (
     <div className="grid md:-grid-cols-2 gap-4">
@@ -32,7 +35,7 @@ const numberWithcommas = (x) => {
           <span className="font-bold">Total: </span>
           {stats.TotalDeaths}
         </div>
-      </div>      
+      </div>
 
     </div>
   );

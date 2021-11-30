@@ -9,6 +9,11 @@ const initialState = {
   dataDate: '',
   stats: {},
   countries: [],
+  selected: {
+    ID: 0,
+    value: 'Select country'
+  }
+
 }
 
 const Home = () => {
@@ -16,11 +21,6 @@ const Home = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const [data, setData] = useState(initialState);
-
-  const [selected, setSelected] = useState({
-    ID: 1,
-    label: 'Select country'
-  });
 
   useEffect(() => {
     getData()
@@ -46,34 +46,33 @@ const Home = () => {
         ...data,
         stats: country,
         title: country.Country,
+        selected: {
+          ID: country.ID,
+          value: country.Country
+        }
       });
-      console.log("Pais : ", country);
     } else {
-      console.log("Else : ", data);
       getData();
     }
 
   }
 
-  const handleOnclick = () => {
+  const handleOnClick = () => {
     setIsLoading(true);
     getData();
-    setSelected({...selected,
-      ID: 1,
-      label: 'Select country'
-    });
     setIsLoading(false);
   }
-
+  
+  console.log("Render Home");
   return (
     <>
       {!isLoading ?
         <main className="mb-10">
           <DataTitle text={data.title} dataDate={data.dataDate} />
           <DataBoxes stats={data.stats} />
-          <CountrySelect countries={data.countries} handleOnChange={handleOnChange} selected={selected}/>
+          <CountrySelect countries={data.countries} handleOnChange={handleOnChange} selected={data.selected}/>
           {data.stats.Country &&
-            <button className="bg-green-700 text-white rounded p-3 mt-10 focus:outline-none hover:bg-green-600" onClick={handleOnclick}>
+            <button className="bg-green-700 text-white rounded p-3 mt-10 focus:outline-none hover:bg-green-600" onClick={handleOnClick}>
               Clear Country
             </button>
           }
