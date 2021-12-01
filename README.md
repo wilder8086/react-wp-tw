@@ -21,7 +21,7 @@ npm i webpack webpack-cli -D
 ## Add react
 
 # Install react and react-dom
-npm i react react-dom -S
+npm i react react-dom react-router-dom -S
 
 
 # Then install babel-core, babel-loader, babel-preset-env, and babel-preset-react as dependencies:
@@ -185,7 +185,8 @@ ReactDOM.render(<Index />, document.getElementById("index"));
 # npm run start
 
 
-
+# crear string aleatorios 
+1. npm install uuid
 
 
  

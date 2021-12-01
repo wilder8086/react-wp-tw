@@ -6,3 +6,6 @@
 @tailwind utilities;
 
 /* Custom css */
+body {
+  background: #202124;
+}
