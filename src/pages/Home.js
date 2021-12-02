@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { GlobalContext } from '../context/GlobalState';
 import loadingImage from '../assets/hourglass.gif';
 import CountrySelect from '../components/CountrySelect';
 import DataBoxes from '../components/DataBoxes';
@@ -13,7 +14,6 @@ const initialState = {
     ID: 0,
     value: 'Select country'
   }
-
 }
 
 const Home = () => {
@@ -21,6 +21,10 @@ const Home = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const [data, setData] = useState(initialState);
+
+  const { globalState } = useContext(GlobalContext)
+
+  console.log("globalstate", globalState);
 
   useEffect(() => {
     getData()
