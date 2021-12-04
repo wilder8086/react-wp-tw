@@ -1,18 +1,24 @@
 import React from 'react';
 import moment from 'moment';
+import { GlobalContext } from '../context/GlobalState';
 
-const DataTitle = ({text, dataDate}) => {
+const DataTitle = () => {
+  console.log("Render DataTitle ");
+  
+  const { title, dataDate } = React.useContext(GlobalContext);
 
-  console.log("Render DataTitle");
+  const [titleValue, setTitleValue] = title;
+  const [dataDateValue, setDataDateValue] = dataDate;
+
   const timestamp = (date) => {
     return moment(date).format('MMMM Do YYYY, h:mm:ss a');
   }
 
   return (
     <div className="text-center">
-      <h2 className="text-3xl font-bold">{ text }</h2>
+      <h2 className="text-3xl font-bold">{ titleValue }</h2>
       <div className="text-2xl mt-4 mb-10">
-        { timestamp(dataDate) }
+        { timestamp(dataDateValue) }
       </div>
     </div>
   );

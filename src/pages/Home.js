@@ -1,81 +1,63 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { GlobalContext } from '../context/GlobalState';
+//import { GlobalContext } from '../context/GlobalContext2';
 import loadingImage from '../assets/hourglass.gif';
 import CountrySelect from '../components/CountrySelect';
 import DataBoxes from '../components/DataBoxes';
 import DataTitle from '../components/DataTitle';
 
-const initialState = {
-  title: 'Global',
-  dataDate: '',
-  stats: {},
-  countries: [],
-  selected: {
-    ID: 0,
-    value: 'Select country'
-  }
-}
-
 const Home = () => {
-
   const [isLoading, setIsLoading] = useState(false);
 
-  const [data, setData] = useState(initialState);
+  //const [state, setState] = useContext(GlobalContext);
 
-  const { globalState } = useContext(GlobalContext)
+  const { dataDate, stats, countries, selected } = React.useContext(GlobalContext);
 
-  console.log("globalstate", globalState);
+  const [dataDateValue, setDataDateValue] = dataDate;
+  const [countriesValue, setCountriesValue] = countries;
+  const [statsValue, setStatsValue] = stats;
+  const [selectedValue, setSelectedValue] = selected;
+
 
   useEffect(() => {
-    getData()
+    setIsLoading(true);
+    getSummary()
+    setIsLoading(false);
   }, []); // [] se va ejecutar la primera vez
 
-  const getData = async () => {
+  const getSummary = async () => {
     let res = await fetch('https://api.covid19api.com/summary');
-    let data = await res.json();
-    console.log("Llamando a getData() : ",data);
-    setData({
-      ...initialState,
-      dataDate: data.Date,
-      countries: data.Countries,
-      stats: data.Global,     
-    })
-  }
+    let dataResponse = await res.json();
+    console.log("Llamando a getData() : ",dataResponse);
 
-  const handleOnChange = (e) => {
-    console.log("wilder ", e.target.value);
-    let country = data.countries.find((item) => item.ID === e.target.value)
-    if (country) {
-      setData({
-        ...data,
-        stats: country,
-        title: country.Country,
-        selected: {
-          ID: country.ID,
-          value: country.Country
-        }
-      });
-    } else {
-      getData();
-    }
+   setDataDateValue(dataResponse.Date);
+
+   setCountriesValue(dataResponse.Countries);
+
+   setStatsValue(dataResponse.Global);
+
+   setSelectedValue({
+      ID: 0,
+      value: 'Select country'
+    });
 
   }
 
   const handleOnClick = () => {
     setIsLoading(true);
-    getData();
+    getSummary();
     setIsLoading(false);
   }
-  
+ 
   console.log("Render Home");
   return (
     <>
       {!isLoading ?
         <main className="mb-10">
-          <DataTitle text={data.title} dataDate={data.dataDate} />
-          <DataBoxes stats={data.stats} />
-          <CountrySelect countries={data.countries} handleOnChange={handleOnChange} selected={data.selected}/>
-          {data.stats.Country &&
+          <DataTitle />
+          <DataBoxes />
+          <CountrySelect getSummary={getSummary}/>
+          {statsValue.Country &&
             <button className="bg-green-700 text-white rounded p-3 mt-10 focus:outline-none hover:bg-green-600" onClick={handleOnClick}>
               Clear Country
             </button>

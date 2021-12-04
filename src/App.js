@@ -10,7 +10,9 @@ const App = () => {
     <>
       <Header />
       <div className="container">
-        <Home />
+        <GlobalProvider>
+          <Home />
+        </GlobalProvider>
       </div>
     </>
   )

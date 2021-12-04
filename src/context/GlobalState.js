@@ -1,32 +1,23 @@
-import { createContext, useReducer } from "react";
+import React, { createContext, useState } from "react";
+
+export const GlobalContext = createContext();
 
 
-import appReducer from "./AppReducer";
+const GlobalProvider = ({ children }) => {
 
 
-const initialState = {
-  title: 'Global',
-  dataDate: '',
-  stats: {},
-  countries: [],
-  selected: {
-    ID: 0,
-    value: 'Select country'
-  }
-}
-
-
-export const GlobalContext = createContext(initialState);
-
-export const GlobalProvider = ({ children }) => {
-  const [globalState, dispatch] = useReducer(appReducer, initialState);
+  const [title, setTitle] = useState('Global');
+  const [dataDate, setDataDate] = useState('');
+  const [stats, setStats] = useState({});
+  const [countries, setCountries] = useState([]);
+  const [selected, setSelected] = useState({ ID: 0, value: 'Select country'});
+  
   return (
-    <GlobalContext.Provider
-      value={{
-        ...globalState
-      }}
+    <GlobalContext.Provider value={{ title: [title, setTitle], dataDate: [dataDate, setDataDate], stats: [stats, setStats], countries: [countries, setCountries], selected: [selected, setSelected] }}
     >
       {children}
     </GlobalContext.Provider>
   );
-};  
+};
+
+export { GlobalProvider };
