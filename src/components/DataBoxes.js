@@ -5,9 +5,9 @@ const DataBoxes = () => {
 
   console.log("Render DataBoxes");
   
-  const { stats } = React.useContext(GlobalContext);
+  const { statsValue } = React.useContext(GlobalContext);
 
-  const [statsValue, setStatsValue] = stats;
+  const [stats] = statsValue;
   
   const numberWithcommas = (x) => {
     return x.toString()
@@ -21,11 +21,11 @@ const DataBoxes = () => {
         <h3 className="text-3xl text-blue-900 font-bold mb-4">Cases</h3>
         <div className="text-2xl mb-4">
           <span className="font-bold">New: </span>
-          {statsValue.NewConfirmed}
+          {stats.NewConfirmed}
         </div>
         <div className="text-2xl mb-4">
           <span className="font-bold">Total: </span>
-          {statsValue.TotalConfirmed}
+          {stats.TotalConfirmed}
         </div>
       </div>
 
@@ -33,11 +33,11 @@ const DataBoxes = () => {
         <h3 className="text-3xl text-blue-900 font-bold mb-4">Deaths</h3>
         <div className="text-2xl mb-4">
           <span className="font-bold">New: </span>
-          {statsValue.NewDeaths}
+          {stats.NewDeaths}
         </div>
         <div className="text-2xl mb-4">
           <span className="font-bold">Total: </span>
-          {statsValue.TotalDeaths}
+          {stats.TotalDeaths}
         </div>
       </div>
 

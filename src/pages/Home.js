@@ -9,14 +9,13 @@ import DataTitle from '../components/DataTitle';
 const Home = () => {
   const [isLoading, setIsLoading] = useState(false);
 
-  //const [state, setState] = useContext(GlobalContext);
+  const { titleValue, dataDateValue, statsValue, countriesValue, selectedValue } = React.useContext(GlobalContext);
 
-  const { dataDate, stats, countries, selected } = React.useContext(GlobalContext);
-
-  const [dataDateValue, setDataDateValue] = dataDate;
-  const [countriesValue, setCountriesValue] = countries;
-  const [statsValue, setStatsValue] = stats;
-  const [selectedValue, setSelectedValue] = selected;
+  const [, setTitle] = titleValue;
+  const [, setDataDate] = dataDateValue;
+  const [, setCountries] = countriesValue;
+  const [stats, setStats] = statsValue;
+  const [, setSelected] = selectedValue;
 
 
   useEffect(() => {
@@ -29,14 +28,12 @@ const Home = () => {
     let res = await fetch('https://api.covid19api.com/summary');
     let dataResponse = await res.json();
     console.log("Llamando a getData() : ",dataResponse);
-
-   setDataDateValue(dataResponse.Date);
-
-   setCountriesValue(dataResponse.Countries);
-
-   setStatsValue(dataResponse.Global);
-
-   setSelectedValue({
+    
+   setTitle('Global');
+   setDataDate(dataResponse.Date);
+   setCountries(dataResponse.Countries);
+   setStats(dataResponse.Global);
+   setSelected({
       ID: 0,
       value: 'Select country'
     });
@@ -57,7 +54,7 @@ const Home = () => {
           <DataTitle />
           <DataBoxes />
           <CountrySelect getSummary={getSummary}/>
-          {statsValue.Country &&
+          {stats.Country &&
             <button className="bg-green-700 text-white rounded p-3 mt-10 focus:outline-none hover:bg-green-600" onClick={handleOnClick}>
               Clear Country
             </button>

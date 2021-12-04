@@ -5,10 +5,10 @@ import { GlobalContext } from '../context/GlobalState';
 const DataTitle = () => {
   console.log("Render DataTitle ");
   
-  const { title, dataDate } = React.useContext(GlobalContext);
+  const { titleValue, dataDateValue } = React.useContext(GlobalContext);
 
-  const [titleValue, setTitleValue] = title;
-  const [dataDateValue, setDataDateValue] = dataDate;
+  const [title] = titleValue;
+  const [dataDate] = dataDateValue;
 
   const timestamp = (date) => {
     return moment(date).format('MMMM Do YYYY, h:mm:ss a');
@@ -16,9 +16,9 @@ const DataTitle = () => {
 
   return (
     <div className="text-center">
-      <h2 className="text-3xl font-bold">{ titleValue }</h2>
+      <h2 className="text-3xl font-bold">{ title }</h2>
       <div className="text-2xl mt-4 mb-10">
-        { timestamp(dataDateValue) }
+        { timestamp(dataDate) }
       </div>
     </div>
   );

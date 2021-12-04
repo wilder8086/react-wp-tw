@@ -4,20 +4,20 @@ import { GlobalContext } from '../context/GlobalState';
 const CountrySelect = ({ getSummary }) => {
   console.log("Render CountrySelect");
   
-  const { title, stats, countries, selected } = React.useContext(GlobalContext);
+  const { titleValue, statsValue, countriesValue, selectedValue } = React.useContext(GlobalContext);
 
-  const [titleValue, setTitleValue] = title;
-  const [statsValue, setStatsValue] = stats;
-  const [countriesValue, setCountriesValue] = countries;
-  const [selectedValue, setSelectedValue] = selected;
+  const [, setTitle] = titleValue;
+  const [, setStats] = statsValue;
+  const [countries] = countriesValue;
+  const [selected, setSelected] = selectedValue;
 
 
   const handleOnChange = (e) => {
-    let country = countriesValue.find((item) => item.ID === e.target.value)
+    let country = countries.find((item) => item.ID === e.target.value)
     if (country) {
-      setTitleValue(country.Country);
-      setStatsValue(country);
-      setSelectedValue({
+      setTitle(country.Country);
+      setStats(country);
+      setSelected({
           ID: country.ID,
           value: country.Country
         });
@@ -29,11 +29,11 @@ const CountrySelect = ({ getSummary }) => {
 
   return (
     <div>
-      <select className="form-select mt-10 block w-full border p-3 rounded" onChange={handleOnChange} value={selectedValue}>
+      <select className="form-select mt-10 block w-full border p-3 rounded" onChange={handleOnChange} value={selected}>
 
-        <option value={selectedValue.ID}>{selectedValue.value}</option>
+        <option value={selected.ID}>{selected.value}</option>
         {
-          countriesValue.map(c => (
+          countries.map(c => (
             <option key={c.ID} value={c.ID}>{c.Country}</option>
           ))
         }

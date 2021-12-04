@@ -13,7 +13,7 @@ const GlobalProvider = ({ children }) => {
   const [selected, setSelected] = useState({ ID: 0, value: 'Select country'});
   
   return (
-    <GlobalContext.Provider value={{ title: [title, setTitle], dataDate: [dataDate, setDataDate], stats: [stats, setStats], countries: [countries, setCountries], selected: [selected, setSelected] }}
+    <GlobalContext.Provider value={{ titleValue: [title, setTitle], dataDateValue: [dataDate, setDataDate], statsValue: [stats, setStats], countriesValue: [countries, setCountries], selectedValue: [selected, setSelected] }}
     >
       {children}
     </GlobalContext.Provider>
