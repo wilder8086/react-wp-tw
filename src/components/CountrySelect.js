@@ -3,25 +3,20 @@ import { GlobalContext } from '../context/GlobalState';
 
 const CountrySelect = ({ getSummary }) => {
   console.log("Render CountrySelect");
-  
-  const { titleValue, statsValue, countriesValue, selectedValue } = React.useContext(GlobalContext);
 
-  const [, setTitle] = titleValue;
-  const [, setStats] = statsValue;
-  const [countries] = countriesValue;
-  const [selected, setSelected] = selectedValue;
-
+  const { countries, selected, setState } = React.useContext(GlobalContext);
 
   const handleOnChange = (e) => {
     let country = countries.find((item) => item.ID === e.target.value)
     if (country) {
-      setTitle(country.Country);
-      setStats(country);
-      setSelected({
+      setState({
+        title: country.Country,
+        stats: country,
+        selected: {
           ID: country.ID,
           value: country.Country
-        });
-
+        } 
+      });
     } else {
       getSummary();
     }

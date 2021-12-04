@@ -1,55 +1,48 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { GlobalContext } from '../context/GlobalState';
-//import { GlobalContext } from '../context/GlobalContext2';
 import loadingImage from '../assets/hourglass.gif';
 import CountrySelect from '../components/CountrySelect';
 import DataBoxes from '../components/DataBoxes';
 import DataTitle from '../components/DataTitle';
 
 const Home = () => {
-  const [isLoading, setIsLoading] = useState(false);
-
-  const { titleValue, dataDateValue, statsValue, countriesValue, selectedValue } = React.useContext(GlobalContext);
-
-  const [, setTitle] = titleValue;
-  const [, setDataDate] = dataDateValue;
-  const [, setCountries] = countriesValue;
-  const [stats, setStats] = statsValue;
-  const [, setSelected] = selectedValue;
-
+  const { loading, stats, setState } = useContext(GlobalContext);
 
   useEffect(() => {
-    setIsLoading(true);
+    //setState({ loading: true});
+    if(!loading)
     getSummary()
-    setIsLoading(false);
+    //setIsLoading(false);
   }, []); // [] se va ejecutar la primera vez
 
   const getSummary = async () => {
     let res = await fetch('https://api.covid19api.com/summary');
     let dataResponse = await res.json();
-    console.log("Llamando a getData() : ",dataResponse);
-    
-   setTitle('Global');
-   setDataDate(dataResponse.Date);
-   setCountries(dataResponse.Countries);
-   setStats(dataResponse.Global);
-   setSelected({
-      ID: 0,
-      value: 'Select country'
-    });
+    console.log("Llamando a getData() : ", dataResponse);
 
+    setState({
+      title: 'Global',
+      dataDate: dataResponse.Date,
+      countries: dataResponse.Countries,
+      stats: dataResponse.Global,
+      selected: {
+        ID: 0,
+        value: 'Select country'
+      }
+    });
   }
 
   const handleOnClick = () => {
-    setIsLoading(true);
+    //setState({ loading: true});
+    if(!loading)
     getSummary();
-    setIsLoading(false);
+    //setState({ loading: false});
   }
- 
+
   console.log("Render Home");
   return (
     <>
-      {!isLoading ?
+      {!loading ?
         <main className="mb-10">
           <DataTitle />
           <DataBoxes />

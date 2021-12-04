@@ -5,9 +5,7 @@ const DataBoxes = () => {
 
   console.log("Render DataBoxes");
   
-  const { statsValue } = React.useContext(GlobalContext);
-
-  const [stats] = statsValue;
+  const { stats } = React.useContext(GlobalContext);
   
   const numberWithcommas = (x) => {
     return x.toString()
