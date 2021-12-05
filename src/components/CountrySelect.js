@@ -1,39 +1,22 @@
-import React, { useState } from 'react';
-import { GlobalContext } from '../context/GlobalState';
+import React, { useContext } from 'react';
+import  CovidContext  from '../context/CovidContext';
 
 const CountrySelect = ({ getSummary }) => {
   console.log("Render CountrySelect");
-  
-  const { title, stats, countries, selected } = React.useContext(GlobalContext);
 
-  const [titleValue, setTitleValue] = title;
-  const [statsValue, setStatsValue] = stats;
-  const [countriesValue, setCountriesValue] = countries;
-  const [selectedValue, setSelectedValue] = selected;
-
+  const { countries, selected, changeCountry } = useContext(CovidContext);
 
   const handleOnChange = (e) => {
-    let country = countriesValue.find((item) => item.ID === e.target.value)
-    if (country) {
-      setTitleValue(country.Country);
-      setStatsValue(country);
-      setSelectedValue({
-          ID: country.ID,
-          value: country.Country
-        });
-
-    } else {
-      getSummary();
-    }
+    changeCountry(countries, e.target.value);
   }
 
   return (
     <div>
-      <select className="form-select mt-10 block w-full border p-3 rounded" onChange={handleOnChange} value={selectedValue}>
+      <select className="form-select mt-10 block w-full border p-3 rounded" onChange={handleOnChange} value={selected}>
 
-        <option value={selectedValue.ID}>{selectedValue.value}</option>
+        <option value={selected.ID}>{selected.value}</option>
         {
-          countriesValue.map(c => (
+          countries.map(c => (
             <option key={c.ID} value={c.ID}>{c.Country}</option>
           ))
         }
