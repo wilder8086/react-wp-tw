@@ -1,11 +1,11 @@
 import React from 'react';
 
-import bg from "./img/bg.jpg";
+//import bg from "./assets/images/bg.jpg";
 
 
-const Main = () => {
+const Main = ({imagen}) => {
   return (
-    <div className="bg-auto h-auto text-white py-24 px-10 mt-5 mx-2" style={{ backgroundImage: `url(${bg})` }}>
+    <div className="bg-auto h-auto text-white py-24 px-10 mt-5 mx-2" style={{ backgroundImage: `url(${imagen})` }}>
     <div className="md:w-1/2">
 
       <p className="font-bold text-sm uppercase">Experiencias</p>

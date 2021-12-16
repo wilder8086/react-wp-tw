@@ -6,7 +6,8 @@
   npm init 
 
 # install webpack cli
-npm i webpack webpack-cli -D
+  Webpack cuenta con un CLI que nos ayuda con comandos para poder interactuar con todas las herramientas que cuenta webpack. Vamos a instalarlo con:
+  npm i webpack webpack-cli -D
 
 # Create folder src and create index.js
 
@@ -29,7 +30,7 @@ npm i react react-dom -S
 npm i babel-loader @babel/core @babel/preset-env @babel/preset-react @babel/cli -D
 
 
-# setup webpack, in your project root, create file called webpack.config.js and add
+# setup webpack, in your project root, create file called webpack.config.js. This webpack folder essentially runs in the node environment and not the browser. Therefore we can write vanilla js code here.
 module.exports = {
   module: {
     rules: [
@@ -44,7 +45,7 @@ module.exports = {
   }
 };
 
-# setup babel, create in your project root .babelrc
+# setup babel, create in your project root .babelrc which will transpile our react code from jsx to regular js. We need to include the following presets :
 
 {
   "presets": ["@babel/preset-env", "@babel/preset-react"]
@@ -184,6 +185,15 @@ ReactDOM.render(<Index />, document.getElementById("index"));
 
 # npm run start
 
+
+Para WEBPACK 5
+  "devDependencies": {
+    "copy-webpack-plugin": "^8.1.0",
+    "webpack": "^5.65.0",  ó "webpack": "^5.62.1",
+    "webpack-cli": "^4.9.1"
+  }  
+
+Para WEBPACK 4    
 
 
 
