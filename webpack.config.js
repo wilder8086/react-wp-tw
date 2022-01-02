@@ -6,6 +6,12 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 // modulo path de node, me permite concatenar directorios independientemente de Sistema Operativo usemos
 const path = require('path');
 
+console.log("wilderrrrrrrrrrrrrrrrrrrrrrrrr");
+console.log("__dirname", path.resolve(__dirname)) // C:\Users\Administrator\Desktop\test
+console.log("__dirname ./", path.resolve(__dirname, './')) // C:\Users\Administrator\Desktop\test
+console.log("__dirname ../bar", path.resolve(__dirname, './bar')) // C:\Users\Administrator\Desktop\test\bar
+console.log("__dirname ../bar", path.resolve(__dirname, '../bar')) // C:\Users\Administrator\Desktop\bar
+
 const PATHS = {
   react: path.join(__dirname, 'node_modules/react/dist/react.min.js'),
   app: path.join(__dirname, 'src'),
@@ -50,7 +56,7 @@ module.exports = {
   plugins: [
     new CopyWebpackPlugin({
       patterns: [
-        // debemos pasar rutas absolutas y para no estar concatenando
+        // debemos pasar rutas absolutas y para no estar concatenando entonces
         // path.resolve me da la ruta abosluta uniendo estos 2 subdirectorios
         // { from: 'public/assets/images/', 
         //   to: 'assets/images/',
